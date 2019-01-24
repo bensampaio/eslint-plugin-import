@@ -188,10 +188,12 @@ const erroredContexts = new Set()
  */
 function resolve(p, context) {
   try {
-    return relative( p
-                   , context.getFilename()
-                   , context.settings
-                   )
+    return fs.realpathSync(
+      relative( p
+      , context.getFilename()
+      , context.settings
+      )
+    )
   } catch (err) {
     if (!erroredContexts.has(context)) {
       context.report({
